@@ -1,0 +1,14 @@
+a {
+text-decoration :none;
+}
+
+ul {
+list-style :none;
+}
+
+.move-center{
+    margin: auto;
+    width: 60%;
+    border: 3px solid #73AD21;
+    padding: 10px;
+}
