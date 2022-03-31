@@ -1,0 +1,27 @@
+{% extends 'crime/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container pt-5 p-5">
+    <h5 class="lead">Blog Articles</h5>
+        <div class="row">
+        {% for post in object_list %}
+
+            <div class="col">
+                <div class="card-deck">
+                    <div class="card mb-2">
+                        <div class="card-body">
+                            <img src="/media/{{post.post_image}}" alt="" class="img-fluid">
+                            <h5 class="card-title"><a href="{% url 'post-detail' post.id %}" class="card-link">{{ post.post_title }}</a></h5>
+                            <p class="card-text">{{ post.post_body }}</p>
+                            <a href="{% url 'post-detail' post.id %}" class="card-link btn btn-light">Continue...</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'crime/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container pt-5">
+        {% for report in object_list %}
+        <div class="card align-items-center">
+            <h5 class="card-title"><a href="{% url 'report-detail' report.id %}">{{ report.report_title }}</a></h5>
+            <img src="/media/{{report.report_image}}" alt="Report Image" class="img-fluid">
+            <span>{{ report.report_date }} By {{ report.report_author }}</span>
+            <p class="lead card-text">{{ report.report_body }}</p>
+            <span class="text-muted">Location: {{ report.report_location }}</span>
+            <button class="btn-btn-primary"><a href="{% url 'report-detail' report.id %}">Read More</a></button>
+        </div>
+    {% endfor %}
+    </div>
+
+{% endblock %}

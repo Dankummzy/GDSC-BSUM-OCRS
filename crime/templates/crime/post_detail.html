@@ -1,0 +1,20 @@
+{% extends 'crime/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container pt-5 p-5">
+        <div class="card">
+            <h5 class="card-title">{{ object.post_title }}</h5>
+            <img src="/media/{{object.post_image}}" alt="" class="card-img-top img-fluid">
+            <span>{{ object.post_date }} By {{ object.post_author }}</span>
+            <p class="lead card-text">{{ object.post_body }}</p>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+
+
+

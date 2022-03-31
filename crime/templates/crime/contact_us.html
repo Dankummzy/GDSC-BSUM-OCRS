@@ -1,0 +1,23 @@
+{% extends 'crime/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container-fluid p-3 mx-auto">
+        <div class="card p-5">
+            <div class="card-body">
+                <h6 class="font-weight-bold pt-5"> Contact Us</h6>
+                <h4 class="lead p-3 card-title">Welcome to our contact page</h4>
+                <img src="{% static 'contact.jpg' %}" alt="Contact Image" class="p-3" width="100%" height="50%">
+                <p class="p-3 card-text">This project(Quick Online Crime Response System) was designed and developed by the Google Developer Student Club community of
+                Benue State University, Makurdi for the Google solution challenge.
+                </p>
+                <h5 class="p-3 card-title">You can contact the following security numbers</h5>
+                <p class="card-text">First camp security post: +23480567890987</p>
+                <p class="card-text">Second camp security Post: +2348133456789</p>
+                <p class="card-text">College of Health School Post: +2347055454356</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
