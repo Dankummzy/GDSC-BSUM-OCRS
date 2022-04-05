@@ -11,15 +11,10 @@
 
     <div class="container p-5 pt-5">
         <h3 class="lead">Login</h3><hr>
-        <form action="/postsignIn/" method="POST">
+        <form action="" method="POST">
             {% csrf_token %}
-            <div class="form-group">
-                <label for="Email">Email</label>
-                <input type="email" name="Email"><br><br>
-                <label for="Password">Password</label>
-                <input type="password" name="Password"><br><br>
-                <button class="btn btn-primary">Login</button>
-            </div>
+            {{ form|crispy}}
+            <div class="form-group"><button class="btn btn-primary" type="submit">Login</button></div>
             <div class="form-group">
                 <div>
                     <span>If you don't have an account then <a href="{% url 'register' %}">Sign Up</a></span>

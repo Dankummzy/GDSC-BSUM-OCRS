@@ -7,6 +7,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'base.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@800&display=swap" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {% if title %}
         <title>Reporter - {{ title }}</title>
@@ -17,7 +20,7 @@
 <body>
     <div class="container-fluid">
         <nav class="navbar navbar-expand-sm navbar-light bg-light justify-content-center">
-            <a href="{% url 'home-page' %}" class="navbar-brand">REPORTER</a>
+            <a href="{% url 'home-page' %}" class="navbar-brand">BSUM Crime Report Site</a>
             <button class="navbar-toggler" type="button"  data-bs-toggle="collapse" data-bs-target="#Navbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -60,10 +63,11 @@
                     Welcome to Google Developer's Student Club Benue State University Makurdi Online Crime Reporting Website
                     developed by the GDSC Community.
                     </p>
-                    <p class="lead">Your reporting can save the life of an individual.
-                    If you keep quiet you may be the next victim. Report so that our
-                    campus will be safe for everyone</p>
                     <a href="{% url 'report-create' %}"><button class="btn btn-primary btn-lg">Report</button></a>
+                    <h2 class="pt-3">Security Caution</h2>
+                    <p class="lead ">Crime is Evil and can never go unpunished. Avoid Crime!
+                    Protect yourself from being a victim of crime!
+                    Report when you see Crime. Protect yourself and Stay Safe. </p>
                 </div>
                 <img src="{% static 'logo.png' %}" alt="BSUM" class="img-fluid w-50 d-none d-sm-block">
             </div>
@@ -97,6 +101,7 @@
             </div>
             {% endfor %}
             </div>
+
             <h5 class="lead">Blog Feeds</h5>
             <div class="row g-3">
             {% for post in posts %}
@@ -113,6 +118,7 @@
                 </div>
             </div>
             {% endfor %}
+
         {% else %}
             <h5 class="lead">Blog Feeds</h5>
             <div class="row g-3">
@@ -130,7 +136,7 @@
                 </div>
             </div>
             {% endfor %}
-            </div>
+
         {% endif %}
         </div>
     {% endblock %}
@@ -150,6 +156,7 @@
                     <p class="align-center ">Third Column</p>
                 </div>
             </div>
+             <p class="text-center">Developed by GDSC BSUM Copyright &copy;  2022 </p>
         </div>
     </div>
 

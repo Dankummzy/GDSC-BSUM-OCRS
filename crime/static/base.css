@@ -8,5 +8,16 @@ list-style :none;
 
 .move-center{
     margin: auto;
-
+}
+.footer{
+    position: relative;
+    display: flex;
+    padding: 10px;
+    width: 100%;
+    justify-content: center;
+}
+.footer p > .copy_icon{
+    position: relative;
+    display: inline;
+    animation: scale 2.5s infinite;
 }

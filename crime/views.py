@@ -7,7 +7,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 import pyrebase
-from django.core.paginator import Paginator
+from django.core.files.storage import default_storage
+from django.conf import settings
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib import auth
 
 
@@ -23,38 +25,39 @@ firebaseConfig = {
 
 
 firebase = pyrebase.initialize_app(firebaseConfig)
-authe = firebase.auth()
-# database = firebase.database()
+storage = firebase.storage()
 
 
 class HomePageView(View):
 
     def get(self, request, *args, **kwargs):
-        # post_title = database.child('Post').child('post_title').get().val()
-        # post_image = database.child('Post').child('post_image').get().val()
-        # post_body = database.child('Post').child('post_body').get().val()
-        # post_author = database.child('Post').child('post_author').get().val()
-        # post_date = database.child('Post').child('post_date').get().val()
 
         posts = Post.objects.all()
         reports = Report.objects.all()
-        # page = 1
-        # result = 3
-        # posts_paginator = Paginator(posts, result)
-        # reports_paginator = Paginator(reports, result)
-        # posts = posts_paginator.page(page)
-        # reports = reports_paginator.page(page)
+
+        posts_paginator = Paginator(posts, 3)
+        posts_page_number = request.GET.get('page')
+        posts_page_obj = posts_paginator.get_page(posts_page_number)
+
+        reports_paginator = Paginator(reports, 3)
+        reports_page_number = request.GET.get('page')
+        reports_page_obj = reports_paginator.get_page(reports_page_number)
+
         security_user = User.objects.filter(is_staff=True)
         if request.user in security_user:
             context = {
                 'object':security_user,
                 'posts':posts,
                 'reports':reports,
+                'posts_page_obj':posts_page_obj,
+                'reports_page_obj':reports_page_obj
+
             }
         else:
             context = {
                 'object':'',
-                'posts':posts
+                'posts':posts,
+                'posts_page_obj': posts_page_obj,
             }
         return render(request, 'crime/home_page.html', context)
 
@@ -65,6 +68,7 @@ def contact_us(request):
 
 class PostListView(ListView):
     model = Post
+    paginate_by = 3
     ordering = ['-post_date']
 
 
@@ -74,10 +78,15 @@ class PostDetailView(DetailView):
 
 @login_required
 def post_create(request):
+    storage.child()
     form = PostForm()
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
+            post_image = request.FILES['post_image']
+            file_save = default_storage.save(post_image.name, post_image)
+            storage.child("files/" + post_image.name).put("media/" + post_image.name)
+            delete = default_storage.delete(post_image.name)
             post_data = form.save(commit=False)
             post_data.post_author = request.user
             form.save()
@@ -87,6 +96,7 @@ def post_create(request):
 
 class ReportListView(ListView):
     model = Report
+    paginate_by = 3
     ordering = ['-report_date']
 
 
@@ -100,6 +110,10 @@ def report_create(request):
     if request.method == "POST":
         form = ReportForm(request.POST, request.FILES)
         if form.is_valid():
+            report_image = request.FILES['report_image']
+            file_save = default_storage.save(report_image.name, report_image)
+            storage.child("files/" + report_image.name).put("media/" + report_image.name)
+            delete = default_storage.delete(report_image.name)
             report_data = form.save(commit=False)
             report_data.report_author = request.user
             form.save()
