@@ -4,7 +4,7 @@ An online crime reporting system for Benue State University, developed by its GD
 # How to Use this code
 1. Clone the repository
 2. Open the python-team-contribution branch
-3. Install django, pillow, django-crispy-forms, ckeditor, pyrebase, bootstrap-5
+3. Install django, Pillow, django-crispy-forms, django-ckeditor, pyrebase, crispy-bootstrap5
 4. Run migrations with "python manage.py makemigrations" then migrate with "python manage.py migrate" commands.
 5. Create a super user with the "python manage.py createsuperuser" command to access the django admin panel
 6. Use the registration form to create new user
